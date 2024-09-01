@@ -361,6 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-/Dataset/flights.csv
-/Dataset/routes.csv
-/Dataset/subscriptions.csv
+/FlightChangeDetector.Console/Dataset/flights.csv
+/FlightChangeDetector.Console/Dataset/routes.csv
+/FlightChangeDetector.Console/Dataset/subscriptions.csv

@@ -36,8 +36,4 @@
     <PackageReference Include="NUnit" Version="4.2.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Dataset\" />
-  </ItemGroup>
-
 </Project>
