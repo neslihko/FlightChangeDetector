@@ -15,9 +15,9 @@ namespace FlightChangeDetector.Services
         public void WriteResultsToCsv(IEnumerable<FlightChange> changes, string filePath)
         {
             using var writer = new StreamWriter(filePath);
-            using var csv = new CsvWriter(writer, new CsvConfiguration(CultureInfo.InvariantCulture));
+            using var csvWriter = new CsvWriter(writer, new CsvConfiguration(CultureInfo.InvariantCulture));
 
-            csv.WriteRecords(changes);
+            csvWriter.WriteRecords(changes);
         }
     }
 }

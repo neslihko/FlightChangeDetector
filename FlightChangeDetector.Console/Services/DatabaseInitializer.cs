@@ -13,7 +13,7 @@ namespace FlightChangeDetector.Services
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly IConfiguration _configuration;
-        private const int BatchSize = 20000; // Adjust this value based on your system's capabilities
+        private const int BatchSize = 20_000; // Adjust this value based on your system's capabilities
 
         public DatabaseInitializer(IServiceProvider serviceProvider, IConfiguration configuration)
         {
@@ -39,6 +39,10 @@ namespace FlightChangeDetector.Services
             var routesPath = _configuration["CsvFilePaths:RoutesPath"];
             var flightsPath = _configuration["CsvFilePaths:FlightsPath"];
             var subscriptionsPath = _configuration["CsvFilePaths:SubscriptionsPath"];
+
+            ArgumentException.ThrowIfNullOrWhiteSpace(routesPath);
+            ArgumentException.ThrowIfNullOrWhiteSpace(flightsPath);
+            ArgumentException.ThrowIfNullOrWhiteSpace(subscriptionsPath);
 
             await ImportRoutesAsync(context, routesPath);
             await ImportFlightsAsync(context, flightsPath);
@@ -105,8 +109,6 @@ namespace FlightChangeDetector.Services
             Console.WriteLine($"Finished importing {importedCount} routes.");
         }
 
-
-
         private async Task ImportFlightsAsync(FlightDbContext context, string path)
         {
             using var reader = new StreamReader(path);
@@ -142,8 +144,8 @@ namespace FlightChangeDetector.Services
 
                     var existingFlight = await context.Flights
                         .FirstOrDefaultAsync(f => f.RouteId == flight.RouteId &&
-                                                  f.DepartureTime == flight.DepartureTime &&
-                                                  f.AirlineId == flight.AirlineId);
+                            f.DepartureTime == flight.DepartureTime &&
+                            f.AirlineId == flight.AirlineId);
 
                     if (existingFlight == null)
                     {
@@ -178,7 +180,6 @@ namespace FlightChangeDetector.Services
 
             Console.WriteLine($"Finished importing {importedCount} flights.");
         }
-
 
         private async Task ImportSubscriptionsAsync(FlightDbContext context, string path)
         {
@@ -222,12 +223,10 @@ namespace FlightChangeDetector.Services
 
         private IEnumerable<IEnumerable<T>> BatchEnumerable<T>(IEnumerable<T> source, int batchSize)
         {
-            using (var enumerator = source.GetEnumerator())
+            using var enumerator = source.GetEnumerator();
+            while (enumerator.MoveNext())
             {
-                while (enumerator.MoveNext())
-                {
-                    yield return YieldBatchElements(enumerator, batchSize - 1);
-                }
+                yield return YieldBatchElements(enumerator, batchSize - 1);
             }
         }
 

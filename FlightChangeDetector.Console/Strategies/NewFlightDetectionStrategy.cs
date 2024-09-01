@@ -4,7 +4,6 @@ namespace FlightChangeDetector.Strategies
 {
     public class NewFlightDetectionStrategy : IChangeDetectionStrategy
     {
-
         public IEnumerable<FlightChange> DetectChanges(IEnumerable<Flight> flights)
         {
             return flights.Where(flight =>

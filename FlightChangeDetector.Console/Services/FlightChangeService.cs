@@ -2,8 +2,6 @@
 using FlightChangeDetector.Repositories;
 using FlightChangeDetector.Strategies;
 
-
-
 namespace FlightChangeDetector.Services
 {
     public class FlightChangeService : IFlightChangeService

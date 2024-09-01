@@ -2,11 +2,8 @@
 using FlightChangeDetector.Models;
 using Microsoft.EntityFrameworkCore;
 
-
-
 namespace FlightChangeDetector.Repositories
 {
-
     public class FlightRepository : IFlightRepository
     {
         private readonly FlightDbContext _context;
@@ -21,9 +18,9 @@ namespace FlightChangeDetector.Repositories
             return await _context.Flights
                 .Include(f => f.Route)
                 .Where(f => f.Route.OriginCityId == originCityId &&
-                            f.Route.DestinationCityId == destinationCityId &&
-                            f.DepartureTime >= startDate &&
-                            f.DepartureTime <= endDate)
+                    f.Route.DestinationCityId == destinationCityId &&
+                    f.DepartureTime >= startDate &&
+                    f.DepartureTime <= endDate)
                 .ToListAsync();
         }
 

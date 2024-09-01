@@ -6,6 +6,4 @@ namespace FlightChangeDetector.Strategies
     {
         IEnumerable<FlightChange> DetectChanges(IEnumerable<Flight> flights);
     }
-
-
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -11,7 +10,7 @@ namespace FlightChangeDetector.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
+            _ = migrationBuilder.CreateTable(
                 name: "Routes",
                 columns: table => new
                 {
@@ -23,10 +22,10 @@ namespace FlightChangeDetector.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Routes", x => x.RouteId);
+                    _ = table.PrimaryKey("PK_Routes", x => x.RouteId);
                 });
 
-            migrationBuilder.CreateTable(
+            _ = migrationBuilder.CreateTable(
                 name: "Subscriptions",
                 columns: table => new
                 {
@@ -36,10 +35,10 @@ namespace FlightChangeDetector.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Subscriptions", x => new { x.AgencyId, x.OriginCityId, x.DestinationCityId });
+                    _ = table.PrimaryKey("PK_Subscriptions", x => new { x.AgencyId, x.OriginCityId, x.DestinationCityId });
                 });
 
-            migrationBuilder.CreateTable(
+            _ = migrationBuilder.CreateTable(
                 name: "Flights",
                 columns: table => new
                 {
@@ -52,8 +51,8 @@ namespace FlightChangeDetector.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Flights", x => x.FlightId);
-                    table.ForeignKey(
+                    _ = table.PrimaryKey("PK_Flights", x => x.FlightId);
+                    _ = table.ForeignKey(
                         name: "FK_Flights_Routes_RouteId",
                         column: x => x.RouteId,
                         principalTable: "Routes",
@@ -61,7 +60,7 @@ namespace FlightChangeDetector.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
+            _ = migrationBuilder.CreateIndex(
                 name: "IX_Flights_RouteId",
                 table: "Flights",
                 column: "RouteId");
@@ -70,13 +69,13 @@ namespace FlightChangeDetector.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
+            _ = migrationBuilder.DropTable(
                 name: "Flights");
 
-            migrationBuilder.DropTable(
+            _ = migrationBuilder.DropTable(
                 name: "Subscriptions");
 
-            migrationBuilder.DropTable(
+            _ = migrationBuilder.DropTable(
                 name: "Routes");
         }
     }
